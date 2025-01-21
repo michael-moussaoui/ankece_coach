@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
+require('dotenv').config();
+
 // const sequelize = require('./config/database');
 const sequelize = require('./models/models.index');
 const authRoutes = require('./routes/auth.routes');
@@ -11,6 +14,12 @@ const fileRoutes = require('./routes/file.routes');
 
 const app = express();
 const PORT = require('./config/config').port;
+// Configuration de CORS
+app.use(cors({
+  origin: process.env.FRONTEND_URL, // Autoriser uniquement cette origine
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Méthodes autorisées
+  credentials: true, // Autoriser l'envoi de cookies ou d'en-têtes d'autorisation
+}));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
