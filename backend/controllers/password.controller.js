@@ -23,12 +23,12 @@ const forgotPassword = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: process.env.EMAIL_USER, // Email de l'expéditeur
-        pass: process.env.EMAIL_PASS, // Mot de passe ou app-password
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS, 
       },
     });
 
-    const resetLink = `http://localhost:3000/reset-password?token=${resetToken}`;
+    const resetLink = `http://localhost:5173/reset-password?token=${resetToken}`;
     await transporter.sendMail({
       to: email,
       subject: 'Réinitialisation du mot de passe',
